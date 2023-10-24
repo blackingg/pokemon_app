@@ -75,30 +75,34 @@ function App() {
 	};
 
 	return (
-		<div className="bg-gray-100 min-h-screen flex justify-center items-center overflow-x-hidden">
-			<div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-screen-xl">
+		<div className="bg-gray-100 min-h-screen flex flex-col justify-center items-center overflow-x-hidden">
+			<div className=" p-8 w-9/12 max-w-screen-xl">
 				<h1 className="text-2xl text-center text-blue-800">Pokemon List</h1>
 				<div className="flex flex-wrap">
 					{currentList.slice(0, maxIndex).map((pokemon) => (
 						<div
 							key={pokemon.id}
-							className="flex-1 w-1/5 md:w-1/5 lg:w-1/5 m-2 mt-16 pt-10 relative cursor-pointer border-2 border-white transition-transform transform duration-100 hover:scale-105"
+							className="flex flex-col justify-center items-center min-w-[20%] rounded-lg m-10 mt-60 pt-20 p-5 relative cursor-pointer border-2  hover:border-gray-300 shadow-md "
 							onClick={() => openInfo(pokemon.id)}
 						>
 							<img
+								className="absolute top-[-55px] pixelated transition duration-100  hover:scale-125"
 								src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
 								alt={pokemon.name}
 							/>
-							<span className="text-xl">N°{pokemon.id}</span>
-							<h2 className="text-base font-semibold mt-2">{pokemon.name}</h2>
+							<span className="text-base text-gray-300 font-semibold">
+								N°{pokemon.id}
+							</span>
+							<h2 className="text-base  font-semibold mt-2">{pokemon.name}</h2>
 							<div className="flex space-x-2">
 								{pokemon.types.map((type, typeIndex) => (
-									<button
+									<div
 										key={typeIndex}
-										className="px-2 py-1 bg-blue-500 text-white rounded-md"
+										className={`px-3 py-1 text-white rounded-md`}
+										style={{ background: typeColors[type] }}
 									>
 										{type}
-									</button>
+									</div>
 								))}
 							</div>
 						</div>
