@@ -89,7 +89,7 @@ function App() {
 								src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
 								alt={pokemon.name}
 							/>
-							<span className="text-xl">N° {pokemon.id}</span>
+							<span className="text-xl">N°+ {pokemon.id}</span>
 							<h2 className="text-base font-semibold mt-2">{pokemon.name}</h2>
 							<div className="flex space-x-2">
 								{pokemon.types.map((type, typeIndex) => (
