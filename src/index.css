@@ -1,14 +1,23 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat");
+@import url("https://fonts.googleapis.com/css2?family=Outfit");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-	font-family: "Montserrat", sans-serif;
-	text-transform: capitalize;
-}
-
 .pixelated {
 	image-rendering: pixelated;
+}
+
+body {
+	background: #f6f8fc;
+	padding: 0 10vw;
+	font-family: "Outfit", sans-serif;
+	text-transform: capitalize;
+	display: flex;
+	justify-content: center;
+	background-image: url(/pokeball-icon.png);
+	background-repeat: no-repeat;
+	background-position-x: -140px;
+	background-position-y: -80px;
+	width: 100%;
 }
