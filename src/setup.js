@@ -19,3 +19,13 @@ export const typeColors = {
 	fairy: "#FFACFF",
 	shadow: "#0E2E4C",
 };
+
+export const statName = [
+	{ name: "HP", color: "#DF2140" },
+	{ name: "ATK", color: "#FF994D" },
+	{ name: "DEF", color: "#eecd3d" },
+	{ name: "SpA", color: "#eecd3d" },
+	{ name: "SpD", color: "#85DDFF" },
+	{ name: "SPD", color: "#FB94A8" },
+	{ name: "TOT", color: "#7195DC" },
+];
