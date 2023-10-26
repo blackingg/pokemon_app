@@ -7,6 +7,8 @@ function App() {
 	const [currentList, setCurrentList] = useState([]);
 	const [selectedPokemon, setSelectedPokemon] = useState(null);
 	const [selectedSpecies, setSelectedSpecies] = useState(null);
+	const [selectedEvo, setSelectedEvo] = useState(null);
+	const [selectedEvoUrl, setSelectedEvoUrl] = useState(null);
 	const [currentlyShowingAmount, setCurrentlyShowingAmount] = useState(0);
 	const [maxIndex, setMaxIndex] = useState(29);
 
@@ -61,7 +63,6 @@ function App() {
 					document.body.offsetHeight - 100 &&
 				currentlyShowingAmount < currentList.length
 			) {
-				// Increase maxIndex when near the bottom and more items are available
 				setMaxIndex((prevMaxIndex) => prevMaxIndex + 10);
 			}
 		}
@@ -76,19 +77,25 @@ function App() {
 	async function openInfo(id) {
 		const urlPokemon = "https://pokeapi.co/api/v2/pokemon/" + id;
 		const urlSpecies = "https://pokeapi.co/api/v2/pokemon-species/" + id;
+		const evoSpecies = "https://pokeapi.co/api/v2/evolution-chain/" + id;
 
 		try {
 			const responsePokemon = await fetch(urlPokemon);
 			const responseSpecies = await fetch(urlSpecies);
+
 			const pokemon = await responsePokemon.json();
 			const species = await responseSpecies.json();
+			const responseEvo = await fetch(species.evolution_chain.url);
+			const evolution = await responseEvo.json();
 
 			console.log(pokemon);
 			console.log(species);
-			console.log(pokemon.abilities);
+			console.log(evolution);
 
 			setSelectedPokemon(pokemon);
 			setSelectedSpecies(species);
+			setSelectedEvo(evolution);
+			setSelectedEvoUrl(evolution.chain.evolves_to[0].species.url);
 		} catch (error) {
 			console.error("Error fetching data:", error);
 		}
@@ -96,6 +103,12 @@ function App() {
 
 	function handlePokemonClick(pokemon) {
 		openInfo(pokemon.id);
+	}
+
+	function filterIdFromSpeciesURL(url) {
+		return url
+			.replace("https://pokeapi.co/api/v2/pokemon-species/", "")
+			.replace("/", "");
 	}
 
 	return (
@@ -109,13 +122,13 @@ function App() {
 					<AiOutlineSearch size={20} />
 				</div>
 			</div>
-			<div className="min-h-screen flex flex-col md:flex-row justify-center items-center">
+			<div className="min-h-screen justify-center items-center">
 				<div>
 					<div className="flex flex-wrap relative md:w-[75%] md:mt-24">
 						{currentList.slice(0, maxIndex).map((pokemon) => (
 							<div
 								key={pokemon.id}
-								className="bg-white flex flex-col justify-center items-center w-[42%] md:w-[22%] rounded-lg m-1 md:m-10 pt-10 p-5 relative cursor-pointer  hover:border-gray-300 shadow-md hover:shadow-none"
+								className="bg-white flex flex-col justify-center items-center w-[42%] md:w-[22%] rounded-lg mt-16 md:mt-0 m-1 md:m-10 pt-10 p-5 relative cursor-pointer  hover:border-gray-300 shadow-md hover:shadow-none"
 								onClick={() => handlePokemonClick(pokemon)}
 							>
 								<img
@@ -144,16 +157,16 @@ function App() {
 						))}
 					</div>
 				</div>
-				<div className="bg-white w-[27%] h-[70vh] md:fixed right-[calc(10vw-60px)] px-1 py-5 text-center bottom-0 mb-0 rounded-3xl ">
+				<div className="bg-white md:w-[27%] md:h-[70vh] md:fixed md:right-[calc(10vw-60px)] px-1 py-5 text-center bottom-0 mb-0 rounded-3xl absolute ">
 					{selectedPokemon && (
-						<div className="flex flex-col justify-center items-center">
-							<img
-								className="absolute top-[-112px] pixelated transition duration-100 h-[126px]"
-								src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${selectedPokemon.id}.gif`}
-								alt={selectedPokemon.name}
-							/>
-							<div className="flex flex-col justify-center items-center relative overflow-y-scroll">
-								<div className="h-full mt-3 flex flex-col justify-center items-center">
+						<div className="flex flex-col justify-center items-center ">
+							<div className="flex flex-col justify-center items-center mt-12">
+								<img
+									className="absolute top-[-120px] pixelated transition duration-100 max-w-[350px] h-[222px] max-h-[22vh]"
+									src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${selectedPokemon.id}.gif`}
+									alt={selectedPokemon.name}
+								/>
+								<div className="h-[54vh] pt-80 flex flex-col justify-center items-center overflow-y-auto">
 									<span className="text-base text-gray-300 font-semibold">
 										N°{selectedPokemon.id}
 									</span>
@@ -184,13 +197,13 @@ function App() {
 											<div className="flex flex-col space-y-3">
 												<span className="font-semibold">Height</span>
 												<span className=" font-medium text-sm px-10 py-3 bg-gray-100 rounded-2xl">
-													{selectedPokemon.height}
+													{selectedPokemon.height}m
 												</span>
 											</div>
 											<div className="flex flex-col space-y-3">
 												<span className="font-semibold">Weight</span>
 												<span className="font-medium text-sm px-10 py-3 bg-gray-100 rounded-2xl">
-													{selectedPokemon.weight}
+													{selectedPokemon.weight} kg
 												</span>
 											</div>
 										</div>
@@ -216,10 +229,10 @@ function App() {
 											{selectedPokemon.stats.map((stat, index) => (
 												<div
 													key={index}
-													className="flex flex-col font-medium text-sm p-1 rounded-3xl bg-gray-100 space-y-2"
+													className="flex flex-col font-medium text-[10px] p-1 rounded-3xl bg-gray-100 space-y-2"
 												>
 													<span
-														className="w-auto p-1 h-auto rounded-2xl"
+														className="w-6 p-1 h-6 rounded-full"
 														style={{ background: statName[index].color }}
 													>
 														{statName[index].name}
@@ -227,6 +240,42 @@ function App() {
 													<span>{stat.base_stat}</span>
 												</div>
 											))}
+										</div>
+									</div>
+									<div className="mt-5">
+										<span className="text-base font-semibold">Evolution</span>
+										<div className="flex">
+											<img
+												className=""
+												src={
+													"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" +
+													filterIdFromSpeciesURL(
+														selectedEvo.chain.species.url
+													) +
+													".png"
+												}
+												alt={selectedPokemon.name}
+											/>
+											<img
+												className=""
+												src={
+													"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" +
+													filterIdFromSpeciesURL(selectedEvoUrl) +
+													".png"
+												}
+												alt={selectedPokemon.name}
+											/>
+											<img
+												className=""
+												src={
+													"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" +
+													filterIdFromSpeciesURL(
+														selectedSpecies.evolution_chain.url
+													) +
+													".png"
+												}
+												alt={selectedPokemon.name}
+											/>
 										</div>
 									</div>
 								</div>
