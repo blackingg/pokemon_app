@@ -12,6 +12,8 @@ function App() {
 	const [currentlyShowingAmount, setCurrentlyShowingAmount] = useState(0);
 	const [maxIndex, setMaxIndex] = useState(29);
 
+	const [searchText, setSearchText] = useState("");
+
 	// Function for fetching data and updating the state
 	async function fetchData() {
 		try {
@@ -111,13 +113,43 @@ function App() {
 			.replace("/", "");
 	}
 
+	async function search(searchText) {
+		try {
+			let searchResults = [];
+
+			for (let i = 0; i < currentList.length; i++) {
+				if (currentList[i].name) {
+					if (
+						currentList[i].name
+							.replaceAll("-", " ")
+							.includes(searchText.toLowerCase())
+					) {
+						searchResults.push(currentList[i]);
+					}
+				}
+			}
+
+			setCurrentList(searchResults);
+			setCurrentlyShowingAmount(0);
+			setMaxIndex(29);
+		} catch (error) {
+			console.error("Error searching:", error);
+		}
+	}
+
 	return (
 		<div className="w-screen px-12">
 			<div className="bg-white flex w-full md:w-8/12 p-4 mt-5 ml-0 md:ml-20 shadow-md rounded-3xl">
 				<input
+					id="search-input"
 					className="flex-1 outline-none text-base text-blue-900 font-semibold"
 					placeholder="Search your Pokemon"
-				></input>
+					value={searchText}
+					onChange={(e) => {
+						setSearchText(e.target.value);
+						search(e.target.value);
+					}}
+				/>
 				<div className="bg-[#FF5350] text-white flex justify-center items-center w-10 h-10 drop-shadow-[5px_8px_10px_rgba(255,83,80,0.533)] rounded-xl">
 					<AiOutlineSearch size={20} />
 				</div>
@@ -166,7 +198,7 @@ function App() {
 									src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${selectedPokemon.id}.gif`}
 									alt={selectedPokemon.name}
 								/>
-								<div className="h-[54vh] pt-80 flex flex-col justify-center items-center overflow-y-auto">
+								<div className="h-[54vh] pt-96 flex flex-col justify-center items-center overflow-y-auto">
 									<span className="text-base text-gray-300 font-semibold">
 										N°{selectedPokemon.id}
 									</span>
@@ -192,7 +224,7 @@ function App() {
 											{selectedSpecies.flavor_text_entries[0].flavor_text}
 										</div>
 									</div>
-									<div className="mt-5 w-full">
+									<div className="mt-5 w-full p-3">
 										<div className="grid grid-cols-2 mt-2 space-x-4 m-2">
 											<div className="flex flex-col space-y-3">
 												<span className="font-semibold">Height</span>
@@ -242,40 +274,31 @@ function App() {
 											))}
 										</div>
 									</div>
-									<div className="mt-5">
+									<div className="mt-5 space-y-1">
 										<span className="text-base font-semibold">Evolution</span>
 										<div className="flex">
-											<img
-												className=""
-												src={
-													"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" +
-													filterIdFromSpeciesURL(
-														selectedEvo.chain.species.url
-													) +
-													".png"
-												}
-												alt={selectedPokemon.name}
-											/>
-											<img
-												className=""
-												src={
-													"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" +
-													filterIdFromSpeciesURL(selectedEvoUrl) +
-													".png"
-												}
-												alt={selectedPokemon.name}
-											/>
-											<img
-												className=""
-												src={
-													"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" +
-													filterIdFromSpeciesURL(
-														selectedSpecies.evolution_chain.url
-													) +
-													".png"
-												}
-												alt={selectedPokemon.name}
-											/>
+											<div className="flex flex-row">
+												<img
+													className="pixelated p-auto max-w-[350px] h-[222px] max-h-[27vh]"
+													src={
+														"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" +
+														filterIdFromSpeciesURL(
+															selectedEvo.chain.species.url
+														) +
+														".png"
+													}
+													alt={selectedPokemon.name}
+												/>
+												<img
+													className="pixelated max-w-[350px] h-[222px] max-h-[22vh]"
+													src={
+														"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" +
+														filterIdFromSpeciesURL(selectedEvoUrl) +
+														".png"
+													}
+													alt={selectedPokemon.name}
+												/>
+											</div>
 										</div>
 									</div>
 								</div>
