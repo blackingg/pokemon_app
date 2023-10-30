@@ -138,7 +138,7 @@ function App() {
 	}
 
 	return (
-		<div className="w-screen px-12">
+		<>
 			<div className="bg-white flex w-full md:w-8/12 p-4 mt-5 ml-0 md:ml-20 shadow-md rounded-3xl">
 				<input
 					id="search-input"
@@ -307,7 +307,7 @@ function App() {
 					)}
 				</div>
 			</div>
-		</div>
+		</>
 	);
 }
 
