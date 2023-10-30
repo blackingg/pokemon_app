@@ -196,17 +196,18 @@ function App() {
 							))}
 						</div>
 					</div>
-					{loading ? (
-						<div className="w-screen h-screen flex justify-center items-center bg-white">
-							<img
-								className="motion-safe:animate-spin"
-								src={`./pokeball-icon.png`}
-								a
-							/>
-						</div>
-					) : (
-						<div className="bg-white md:w-[27%] md:h-[70vh] md:fixed md:right-[calc(10vw-60px)] px-1 py-5 text-center bottom-0 mb-0 rounded-3xl absolute ">
-							{selectedPokemon && (
+
+					<div className="bg-white md:w-[27%] md:h-[70vh] md:fixed md:right-[calc(10vw-60px)] px-1 py-5 text-center bottom-0 mb-0 rounded-3xl absolute ">
+						{loading ? (
+							<div className="w-screen h-screen flex justify-center items-center bg-white">
+								<img
+									className="motion-safe:animate-spin"
+									src={`./pokeball-icon.png`}
+									a
+								/>
+							</div>
+						) : (
+							selectedPokemon && (
 								<div className="flex flex-col justify-center items-center">
 									<div className="flex flex-col justify-center items-center mt-12">
 										<img
@@ -326,9 +327,9 @@ function App() {
 										</div>
 									</div>
 								</div>
-							)}
-						</div>
-					)}
+							)
+						)}
+					</div>
 				</div>
 			</div>
 		</>
