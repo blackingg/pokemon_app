@@ -12,6 +12,7 @@ function App() {
 	const [currentlyShowingAmount, setCurrentlyShowingAmount] = useState(0);
 	const [maxIndex, setMaxIndex] = useState(29);
 
+	const [pokemonList, setPokemonList] = useState([]);
 	const [searchText, setSearchText] = useState("");
 	const [loading, setLoading] = useState(true);
 	const [loadingData, setDataLoading] = useState(true);
@@ -50,6 +51,7 @@ function App() {
 			}
 
 			setCurrentList(pokemonList);
+			setPokemonList(pokemonList);
 			setDataLoading(false);
 			//console.log(pokemonList);
 		} catch (error) {
@@ -137,11 +139,35 @@ function App() {
 			}
 
 			setCurrentList(searchResults);
-			setCurrentlyShowingAmount(0);
-			setMaxIndex(29);
+			if (searchText === "") {
+				resetSearch();
+			} else {
+				setCurrentlyShowingAmount(0);
+				setMaxIndex(29);
+			}
 		} catch (error) {
 			console.error("Error searching:", error);
 		}
+	}
+
+	const handleInputChange = (e) => {
+		const value = e.target.value;
+		setSearchText(value);
+
+		if (value === "") {
+			// If the input is cleared, reset the search
+			resetSearch();
+		} else {
+			// If there is a search term, perform the search
+			search(value);
+		}
+	};
+
+	function resetSearch() {
+		setSearchText("");
+		setCurrentlyShowingAmount(0); // Reset the currentlyShowingAmount
+		setMaxIndex(29); // Reset the maxIndex
+		setCurrentList(pokemonList); // Reset the currentList to the original list
 	}
 
 	return (
@@ -167,10 +193,7 @@ function App() {
 							className="w-fit flex-1 outline-none text-base text-blue-900 font-semibold"
 							placeholder="Search your Pokemon"
 							value={searchText}
-							onChange={(e) => {
-								setSearchText(e.target.value);
-								search(e.target.value);
-							}}
+							onChange={handleInputChange}
 						/>
 						<div className="bg-[#FF5350] text-white flex justify-center items-center w-10 h-10 drop-shadow-[5px_8px_10px_rgba(255,83,80,0.533)] rounded-xl">
 							<AiOutlineSearch size={20} />
