@@ -138,11 +138,11 @@ function App() {
 	}
 
 	return (
-		<>
-			<div className="bg-white flex w-full md:w-8/12 p-4 mt-5 ml-0 md:ml-20 shadow-md rounded-3xl">
+		<div className="">
+			<div className="bg-white flex w-[900px] p-4 mt-5 ml-0 md:ml-20 shadow-md rounded-3xl">
 				<input
 					id="search-input"
-					className="flex-1 outline-none text-base text-blue-900 font-semibold"
+					className="w-fit flex-1 outline-none text-base text-blue-900 font-semibold"
 					placeholder="Search your Pokemon"
 					value={searchText}
 					onChange={(e) => {
@@ -154,13 +154,13 @@ function App() {
 					<AiOutlineSearch size={20} />
 				</div>
 			</div>
-			<div className="min-h-screen justify-center items-center">
+			<div className="w-fit min-h-screen justify-center items-center">
 				<div>
-					<div className="flex flex-wrap relative md:w-[75%] md:mt-24 gap-10">
+					<div className="flex flex-wrap relative md:w-[75%]  md:mt-24 gap-10">
 						{currentList.slice(0, maxIndex).map((pokemon) => (
 							<div
 								key={pokemon.id}
-								className="bg-white flex flex-col justify-center items-center w-[42%] md:w-[22%] rounded-lg mt-16 md:mt-10  pt-10 p-5 relative cursor-pointer  hover:border-gray-300 shadow-md hover:shadow-none"
+								className="bg-white flex flex-col justify-center items-center w-[42%] md:w-[22%] md:min-w-[200px] rounded-lg mt-16 md:mt-10  pt-10 p-5 relative cursor-pointer  hover:border-gray-300 shadow-md hover:shadow-none"
 								onClick={() => handlePokemonClick(pokemon)}
 							>
 								<img
@@ -191,7 +191,7 @@ function App() {
 				</div>
 				<div className="bg-white md:w-[27%] md:h-[70vh] md:fixed md:right-[calc(10vw-60px)] px-1 py-5 text-center bottom-0 mb-0 rounded-3xl absolute ">
 					{selectedPokemon && (
-						<div className="flex flex-col justify-center items-center ">
+						<div className="flex flex-col justify-center items-center">
 							<div className="flex flex-col justify-center items-center mt-12">
 								<img
 									className="absolute top-[-120px] pixelated transition duration-100 max-w-[350px] h-[222px] max-h-[22vh]"
@@ -221,7 +221,7 @@ function App() {
 											Pokedex Entry
 										</span>
 										<div className="text-gray-400 font-medium text-sm mt-2">
-											{selectedSpecies.flavor_text_entries[0].flavor_text}
+											{selectedSpecies.flavor_text_entries[9].flavor_text}
 										</div>
 									</div>
 									<div className="mt-5 w-full p-3">
@@ -307,7 +307,7 @@ function App() {
 					)}
 				</div>
 			</div>
-		</>
+		</div>
 	);
 }
 
