@@ -156,11 +156,11 @@ function App() {
 			</div>
 			<div className="min-h-screen justify-center items-center">
 				<div>
-					<div className="flex flex-wrap relative md:w-[75%] md:mt-24">
+					<div className="flex flex-wrap relative md:w-[75%] md:mt-24 gap-10">
 						{currentList.slice(0, maxIndex).map((pokemon) => (
 							<div
 								key={pokemon.id}
-								className="bg-white flex flex-col justify-center items-center w-[42%] md:w-[22%] rounded-lg mt-16 md:mt-0 m-1 md:m-10 pt-10 p-5 relative cursor-pointer  hover:border-gray-300 shadow-md hover:shadow-none"
+								className="bg-white flex flex-col justify-center items-center w-[42%] md:w-[22%] rounded-lg mt-16 md:mt-10  pt-10 p-5 relative cursor-pointer  hover:border-gray-300 shadow-md hover:shadow-none"
 								onClick={() => handlePokemonClick(pokemon)}
 							>
 								<img
