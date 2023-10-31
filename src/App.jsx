@@ -199,9 +199,9 @@ function App() {
 							<AiOutlineSearch size={20} />
 						</div>
 					</div>
-					<div className="w-screen px-20 min-h-screen justify-center items-center">
+					<div className="w-fit px-10 min-h-screen justify-center items-center">
 						<div>
-							<div className="flex flex-wrap relative md:w-[75%]  md:mt-24 gap-10">
+							<div className="flex flex-wrap relative md:w-[75%]  md:mt-20 gap-10">
 								{currentList.slice(0, maxIndex).map((pokemon) => (
 									<div
 										key={pokemon.id}
