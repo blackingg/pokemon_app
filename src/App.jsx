@@ -85,21 +85,24 @@ function App() {
 	async function openInfo(id) {
 		const urlPokemon = "https://pokeapi.co/api/v2/pokemon/" + id;
 		const urlSpecies = "https://pokeapi.co/api/v2/pokemon-species/" + id;
-		const evoSpecies = "https://pokeapi.co/api/v2/evolution-chain/" + id;
+		const urlevoSpecies = "https://pokeapi.co/api/v2/evolution-chain/" + id;
 
 		try {
 			setLoading(true);
 			const responsePokemon = await fetch(urlPokemon);
 			const responseSpecies = await fetch(urlSpecies);
+			const responseEvoSpecies = await fetch(urlevoSpecies);
 
 			const pokemon = await responsePokemon.json();
 			const species = await responseSpecies.json();
 			const responseEvo = await fetch(species.evolution_chain.url);
 			const evolution = await responseEvo.json();
+			const evoSpecies = await responseEvoSpecies.json();
 
 			console.log(pokemon);
 			console.log(species);
 			console.log(evolution);
+			console.log(evoSpecies);
 
 			setSelectedPokemon(pokemon);
 			setSelectedSpecies(species);
@@ -187,7 +190,7 @@ function App() {
 				</div>
 			) : (
 				<>
-					<div className="bg-white flex w-[900px] p-4 mt-5 ml-0 md:ml-20 shadow-md rounded-3xl">
+					<div className="bg-white flex w-[660px] p-4 mt-5 ml-0 md:ml-12 shadow-md rounded-3xl">
 						<input
 							id="search-input"
 							className="w-fit flex-1 outline-none text-base text-blue-900 font-semibold"
@@ -338,9 +341,9 @@ function App() {
 														Evolution
 													</span>
 													<div className="flex">
-														<div className="flex flex-row">
+														<div className="flex flex-row overflow-hidden">
 															<img
-																className="pixelated p-auto max-w-[350px] h-[222px] max-h-[27vh]"
+																className="pixelated w-[200px] h-[222px] max-h-[27vh]"
 																src={
 																	"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" +
 																	filterIdFromSpeciesURL(
@@ -351,7 +354,7 @@ function App() {
 																alt={selectedPokemon.name}
 															/>
 															<img
-																className="pixelated max-w-[350px] h-[222px] max-h-[22vh]"
+																className="pixelated w-[200px] h-[222px] max-h-[28vh]"
 																src={
 																	"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" +
 																	filterIdFromSpeciesURL(selectedEvoUrl) +
