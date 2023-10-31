@@ -186,7 +186,7 @@ function App() {
 					</div>
 				</div>
 			) : (
-				<div className="">
+				<>
 					<div className="bg-white flex w-[900px] p-4 mt-5 ml-0 md:ml-20 shadow-md rounded-3xl">
 						<input
 							id="search-input"
@@ -199,7 +199,7 @@ function App() {
 							<AiOutlineSearch size={20} />
 						</div>
 					</div>
-					<div className="w-fit min-h-screen justify-center items-center">
+					<div className="w-screen px-20 min-h-screen justify-center items-center">
 						<div>
 							<div className="flex flex-wrap relative md:w-[75%]  md:mt-24 gap-10">
 								{currentList.slice(0, maxIndex).map((pokemon) => (
@@ -369,7 +369,7 @@ function App() {
 							)}
 						</div>
 					</div>
-				</div>
+				</>
 			)}
 		</>
 	);
