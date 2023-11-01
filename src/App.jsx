@@ -107,7 +107,6 @@ function App() {
          setSelectedEvoFinalUrl(
             evolution.chain.evolves_to[0].evolves_to[0].species.url
          );
-         //setSelectedEvoEvo(evoSpecies.chain.evolves_to[0]);
 
          setMinLevel(
             evoSpecies.chain.evolves_to.map((level, index) => (
@@ -275,7 +274,7 @@ function App() {
                      </div>
                   </div>
 
-                  <div className="bg-white md:w-[27%] md:h-[70vh] md:fixed md:right-[calc(10vw-60px)] px-1 py-5 text-center bottom-0 mb-0 rounded-3xl absolute ">
+                  <div className="bg-white md:w-[27%] md:h-[70vh] md:fixed md:right-[calc(10vw-60px)] px-1 py-0 text-center -bottom-10 mb-0 rounded-3xl absolute ">
                      {selectedPokemon ? (
                         <></>
                      ) : (
@@ -306,7 +305,7 @@ function App() {
                                     src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${selectedPokemon.id}.gif`}
                                     alt={selectedPokemon.name}
                                  />
-                                 <div className="h-[54vh] pt-96 mt-7 flex flex-col justify-center items-center overflow-y-auto">
+                                 <div className="h-[54vh] pt-[22rem] mt-7 flex flex-col justify-center items-center overflow-y-auto">
                                     <span className="text-base text-gray-300 font-semibold">
                                        N°{selectedPokemon.id}
                                     </span>
@@ -335,10 +334,10 @@ function App() {
                                        <span className="text-base font-semibold">
                                           Pokedex Entry
                                        </span>
-                                       <div className="text-gray-400 font-medium text-sm mt-2">
+                                       <div className="text-gray-400 px-5 font-medium text-sm mt-2">
                                           {
                                              selectedSpecies
-                                                .flavor_text_entries[9]
+                                                .flavor_text_entries[10]
                                                 .flavor_text
                                           }
                                        </div>
