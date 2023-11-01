@@ -99,10 +99,10 @@ function App() {
 			const evolution = await responseEvo.json();
 			const evoSpecies = await responseEvoSpecies.json();
 
-			console.log(pokemon);
-			console.log(species);
-			console.log(evolution);
-			console.log(evoSpecies);
+			//console.log(pokemon);
+			//console.log(species);
+			//console.log(evolution);
+			//console.log(evoSpecies);
 
 			setSelectedPokemon(pokemon);
 			setSelectedSpecies(species);
@@ -158,19 +158,17 @@ function App() {
 		setSearchText(value);
 
 		if (value === "") {
-			// If the input is cleared, reset the search
 			resetSearch();
 		} else {
-			// If there is a search term, perform the search
 			search(value);
 		}
 	};
 
 	function resetSearch() {
 		setSearchText("");
-		setCurrentlyShowingAmount(0); // Reset the currentlyShowingAmount
-		setMaxIndex(29); // Reset the maxIndex
-		setCurrentList(pokemonList); // Reset the currentList to the original list
+		setCurrentlyShowingAmount(0);
+		setMaxIndex(29);
+		setCurrentList(pokemonList);
 	}
 
 	return (
