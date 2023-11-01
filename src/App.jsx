@@ -14,7 +14,7 @@ function App() {
 
 	const [pokemonList, setPokemonList] = useState([]);
 	const [searchText, setSearchText] = useState("");
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(false);
 	const [loadingData, setDataLoading] = useState(true);
 
 	// Function for fetching data and updating the state
