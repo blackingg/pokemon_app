@@ -188,18 +188,29 @@ function App() {
 				</div>
 			) : (
 				<>
-					<div className="bg-white flex w-[660px] p-4 mt-5 ml-0 md:ml-12 shadow-md rounded-3xl">
-						<input
-							id="search-input"
-							className="w-fit flex-1 outline-none text-base text-blue-900 font-semibold"
-							placeholder="Search your Pokemon"
-							value={searchText}
-							onChange={handleInputChange}
-						/>
-						<div className="bg-[#FF5350] text-white flex justify-center items-center w-10 h-10 drop-shadow-[5px_8px_10px_rgba(255,83,80,0.533)] rounded-xl">
-							<AiOutlineSearch size={20} />
+					<div className="flex space-x-10">
+						<div className="bg-white flex w-[840px] p-4 mt-5 ml-0 md:ml-12 shadow-md rounded-3xl">
+							<input
+								id="search-input"
+								className="w-fit flex-1 outline-none text-base text-blue-900 font-semibold"
+								placeholder="Search your Pokemon"
+								value={searchText}
+								onChange={handleInputChange}
+							/>
+							<div className="bg-[#FF5350] text-white flex justify-center items-center w-10 h-10 drop-shadow-[5px_8px_10px_rgba(255,83,80,0.533)] rounded-xl">
+								<AiOutlineSearch size={20} />
+							</div>
+						</div>
+						<div className="bg-blue-100 flex justify-center items-center p-5 mt-5 shadow-md rounded-3xl">
+							<a
+								target="_blank"
+								href="https://dribbble.com/shots/15128634-Pokemon-Pokedex-Website-Redesign-Concept"
+							>
+								Link to Design
+							</a>
 						</div>
 					</div>
+
 					<div className="w-fit px-10 min-h-screen justify-center items-center">
 						<div>
 							<div className="flex flex-wrap relative md:w-[75%]  md:mt-20 gap-10">
@@ -241,6 +252,10 @@ function App() {
 								<></>
 							) : (
 								<div className="flex h-full justify-center items-center">
+									<img
+										className="absolute top-[-93px] pixelated transition duration-100 max-w-[350px] h-[222px] max-h-[22vh]"
+										src="/no-pokemon-selected-image.png"
+									/>
 									<span className="text-gray-300 w-[60%]  text-xl">
 										Select a Pokemon to display here.
 									</span>
