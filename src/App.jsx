@@ -237,6 +237,15 @@ function App() {
 						</div>
 
 						<div className="bg-white md:w-[27%] md:h-[70vh] md:fixed md:right-[calc(10vw-60px)] px-1 py-5 text-center bottom-0 mb-0 rounded-3xl absolute ">
+							{selectedPokemon ? (
+								<></>
+							) : (
+								<div className="flex h-full justify-center items-center">
+									<span className="text-gray-300 w-[60%]  text-xl">
+										Select a Pokemon to display here.
+									</span>
+								</div>
+							)}
 							{loading ? (
 								<div className="w-full h-full grid place-items-center bg-white">
 									<img
