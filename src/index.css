@@ -13,7 +13,6 @@ body {
 	padding: 0 10vw;
 	font-family: "Outfit", sans-serif;
 	text-transform: capitalize;
-	justify-content: center;
 	background-image: url(/pokeball-icon.png);
 	background-repeat: no-repeat;
 	background-position-x: -140px;

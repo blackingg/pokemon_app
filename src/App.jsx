@@ -188,11 +188,11 @@ function App() {
 				</div>
 			) : (
 				<>
-					<div className="flex space-x-10">
-						<div className="bg-white flex w-[840px] p-4 mt-5 ml-0 md:ml-12 shadow-md rounded-3xl">
+					<div className="flex space-x-3 md:space-x-8 lg:space-x-10">
+						<div className="bg-white flex w-[200px] md:w-[840px] p-4 mt-5 ml-0 md:ml-12 shadow-md rounded-3xl">
 							<input
 								id="search-input"
-								className="w-fit flex-1 outline-none text-base text-blue-900 font-semibold"
+								className="w-full md:w-fit flex-1 outline-none text-base text-blue-900 font-semibold"
 								placeholder="Search your Pokemon"
 								value={searchText}
 								onChange={handleInputChange}
@@ -201,7 +201,7 @@ function App() {
 								<AiOutlineSearch size={20} />
 							</div>
 						</div>
-						<div className="bg-blue-100 flex justify-center items-center p-5 mt-5 shadow-md rounded-3xl">
+						<div className="bg-blue-100 text-xs md:text-base flex justify-center items-center p-5 mt-5 shadow-md rounded-3xl">
 							<a
 								target="_blank"
 								href="https://dribbble.com/shots/15128634-Pokemon-Pokedex-Website-Redesign-Concept"
@@ -211,13 +211,13 @@ function App() {
 						</div>
 					</div>
 
-					<div className="w-fit px-10 min-h-screen justify-center items-center">
+					<div className="w-fit md:px-10 min-h-screen justify-center items-center">
 						<div>
-							<div className="flex flex-wrap relative md:w-[75%]  md:mt-20 gap-10">
+							<div className="flex flex-wrap relative md:w-[75%]  md:mt-20 gap-3 md:gap-10">
 								{currentList.slice(0, maxIndex).map((pokemon) => (
 									<div
 										key={pokemon.id}
-										className="bg-white flex flex-col justify-center items-center w-[42%] md:w-[22%] md:min-w-[200px] rounded-lg mt-16 md:mt-10  pt-10 p-5 relative cursor-pointer  hover:border-gray-300 shadow-md hover:shadow-none"
+										className="bg-white flex flex-col justify-center items-center w-[48%] min-w-[200px] md:w-[40%] lg:w-[22%]  rounded-lg mt-16 md:mt-10  pt-10 p-5 relative cursor-pointer  hover:border-gray-300 shadow-md hover:shadow-none"
 										onClick={() => handlePokemonClick(pokemon)}
 									>
 										<img
