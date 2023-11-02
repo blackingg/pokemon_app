@@ -285,7 +285,7 @@ function App() {
             </div>
             <>
               <div
-                className={`lg:bg-white fixed w-screen h-screen md:w-[27%] md:h-[70vh] md:fixed md:right-[calc(10vw-60px)] py-0 text-center top-[313px] lg:top-56 mb-0 rounded-3xl`}
+                className={`lg:bg-white fixed w-screen h-screen lg:w-[27%] lg:h-[70vh] md:fixed md:right-[calc(10vw-77.2px)] lg:right-[calc(10vw-60px)] py-0 text-center top-[315px] md:top-[400px] lg:top-56 mb-0 rounded-3xl`}
               >
                 {selectedPokemon ? (
                   <></>
@@ -295,7 +295,7 @@ function App() {
                       className="absolute top-[-93px] pixelated transition duration-100 max-w-[350px] h-[222px] max-h-[22vh]"
                       src="/no-pokemon-selected-image.png"
                     />
-                    <span className="text-gray-300 w-[60%]  text-xl">
+                    <span className="text-gray-300 w-[60%] text-xl">
                       Select a Pokemon to display here.
                     </span>
                   </div>
@@ -317,7 +317,7 @@ function App() {
                           style={{
                             background: typeColors[typeData.type.name],
                           }}
-                          className="fixed lg:hidden rounded opacity-100 h-screen w-screen top-0 transition duration-350"
+                          className="fixed lg:hidden opacity-100 h-screen w-screen top-0 transition duration-350"
                         ></div>
                       ))}
                       <div
@@ -326,7 +326,7 @@ function App() {
                       >
                         <img src="./close-icon.png" />
                       </div>
-                      <div className="bg-white px-1 rounded-t-3xl lg:rounded-3xl absolute flex flex-col justify-center items-center z-1">
+                      <div className="bg-white w-screen h-fit lg:w-fit px-1 rounded-t-3xl lg:rounded-3xl absolute flex flex-col justify-center items-center z-1">
                         <div className="flex flex-col justify-center items-center mt-12">
                           <img
                             className="absolute top-[-93px] pixelated transition duration-100 max-w-[350px] h-[222px] max-h-[22vh]"
