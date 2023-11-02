@@ -302,13 +302,25 @@ function App() {
                   </div>
                 )}
                 {loading ? (
-                  <div className="z-30 w-full h-full grid place-items-center bg-white">
-                    <img
-                      className="motion-safe:animate-spin w-[50px]"
-                      src={`./pokeball-icon.png`}
-                      a
-                    />
-                  </div>
+                  <>
+                    <div className="z-30 w-full h-full grid place-items-center bg-white">
+                      <img
+                        className="lg:visible motion-safe:animate-spin w-[50px]"
+                        src={`./pokeball-icon.png`}
+                      />
+                    </div>
+                    <div
+                      style={{
+                        background: "#fff",
+                      }}
+                      className="fixed lg:hidden opacity-100 h-screen w-screen grid place-items-center top-0 transition duration-350"
+                    >
+                      <img
+                        className="lg:hidden motion-safe:animate-spin w-[50px]"
+                        src={`./pokeball-icon.png`}
+                      />
+                    </div>
+                  </>
                 ) : (
                   selectedPokemon && (
                     <>
