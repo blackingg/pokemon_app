@@ -286,7 +286,7 @@ function App() {
             </div>
             <>
               <div
-                className={`lg:bg-white fixed w-screen h-screen lg:w-[27%] lg:h-[70vh] md:fixed md:right-[calc(10vw-77.2px)] lg:right-[calc(10vw-60px)] py-0 text-center top-[40%] md:top-[400px] lg:top-56 mb-0 rounded-3xl`}
+                className={`lg:bg-white fixed w-screen h-screen lg:w-[27%] lg:h-[70vh] md:fixed md:right-[calc(10vw-77.2px)] lg:right-[calc(10vw-60px)] py-0 text-center top-[38%] md:top-[400px] lg:top-56 mb-0 rounded-3xl`}
               >
                 {selectedPokemon ? (
                   <></>
