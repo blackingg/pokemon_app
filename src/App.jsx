@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./index.css";
 import { typeColors, statName } from "./setup";
-import { AiOutlineClose } from "react-icons/ai";
+import { GrFormClose } from "react-icons/gr";
 
 function App() {
   const [currentList, setCurrentList] = useState([]);
@@ -323,9 +323,9 @@ function App() {
                       ))}
                       <div
                         onClick={closePokemonInfo}
-                        className="fixed top-10 flex justify-center items-center right-10 bg-gray-100 cursor-pointer z-20 p-2 rounded-lg lg:hidden transition duration-350"
+                        className="fixed top-10 flex justify-center items-center right-10 bg-gray-100 cursor-pointer z-20 rounded-lg lg:hidden transition duration-350"
                       >
-                        <AiOutlineClose />
+                        <GrFormClose size={30} />
                       </div>
                       <div className="bg-white w-screen h-fit lg:w-fit px-1 rounded-t-3xl lg:rounded-3xl absolute flex flex-col justify-center items-center z-1">
                         <div className="flex flex-col justify-center items-center mt-12">
