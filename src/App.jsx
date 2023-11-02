@@ -229,7 +229,6 @@ function App() {
                 <img
                   className="w-[25px]"
                   src={`./pokeball-icon.png`}
-                  a
                 />
               </div>
             </div>
@@ -244,16 +243,16 @@ function App() {
           </div>
 
           <div className="w-fit min-h-screen justify-center items-center">
-            <div>
+            <>
               <div
                 className={`${
                   selectedPokemon == null && !loading ? "z-20" : ""
-                } flex flex-wrap px-5 lg:px-10 relative md:w-[75%]  md:mt-20 gap-3 md:gap-10`}
+                } flex flex-wrap px-5 md:px-0 lg:px-10 relative md:w-[75%] md:mt-20 gap-3 md:gap-4 lg:gap-10`}
               >
                 {currentList.slice(0, maxIndex).map((pokemon) => (
                   <div
                     key={pokemon.id}
-                    className="bg-white flex flex-col justify-center items-center w-[48%] min-w-[140px] md:min-w-[180px] lg:min-w-[200px] md:w-[40%] lg:w-[22%]  rounded-lg mt-16 md:mt-10  pt-10 p-5 relative cursor-pointer  hover:border-gray-300 shadow-md hover:shadow-none"
+                    className="bg-white flex flex-col justify-center items-center w-[48%] min-w-[140px] md:min-w-[180px] lg:min-w-[200px] md:w-[40%] lg:w-[22%] rounded-lg mt-16 md:mt-10  pt-10 p-5 relative cursor-pointer hover:border-gray-300 shadow-md hover:shadow-none"
                     onClick={() => handlePokemonClick(pokemon)}
                   >
                     <img
@@ -283,7 +282,7 @@ function App() {
                   </div>
                 ))}
               </div>
-            </div>
+            </>
             <>
               <div
                 className={`lg:bg-white fixed w-screen h-screen lg:w-[27%] lg:h-[70vh] md:fixed md:right-[calc(10vw-77.2px)] lg:right-[calc(10vw-60px)] py-0 text-center top-[38%] md:top-[400px] lg:top-56 mb-0 rounded-3xl`}
@@ -303,18 +302,13 @@ function App() {
                 )}
                 {loading ? (
                   <>
-                    <div className="z-30 w-full h-full grid place-items-center bg-white">
+                    <div className=" lg:visible z-30 w-full h-full grid place-items-center bg-white">
                       <img
                         className="lg:visible motion-safe:animate-spin w-[50px]"
                         src={`./pokeball-icon.png`}
                       />
                     </div>
-                    <div
-                      style={{
-                        background: "#fff",
-                      }}
-                      className="fixed lg:hidden opacity-100 h-screen w-screen grid place-items-center top-0 transition duration-350"
-                    >
+                    <div className="fixed lg:hidden bg-white opacity-100 h-screen w-screen grid place-items-center top-0 transition duration-350">
                       <img
                         className="lg:hidden motion-safe:animate-spin w-[50px]"
                         src={`./pokeball-icon.png`}
