@@ -26,7 +26,7 @@ function App() {
     try {
       setDataLoading(true);
       const response = await fetch(
-        "https://pokeapi.co/api/v2/pokemon/?limit=898"
+        "https://pokemon-app-backend-pndzg8bqt-blackinggs-projects.vercel.app/api/pokemon"
       );
       const data = await response.json();
 
