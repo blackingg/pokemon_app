@@ -26,7 +26,7 @@ function App() {
     try {
       setDataLoading(true);
       const response = await fetch(
-        "https://pokemon-app-backend.vercel.app//api/pokemon"
+        "https://pokemon-app-backend.vercel.app/api/pokemon"
       );
       const data = await response.json();
 
