@@ -182,6 +182,8 @@ function App() {
     resetSearch();
     if (value !== "") {
       search(value);
+    } else {
+      resetSearch();
     }
   };
 
