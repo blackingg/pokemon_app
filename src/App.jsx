@@ -180,7 +180,7 @@ function App() {
     const value = e.target.value;
     setSearchText(value);
 
-    if (value === "") {
+    if (value !== "") {
       resetSearch();
     } else {
       search(value);
