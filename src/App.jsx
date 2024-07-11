@@ -179,10 +179,8 @@ function App() {
   const handleInputChange = (e) => {
     const value = e.target.value;
     setSearchText(value);
-
+    resetSearch();
     if (value !== "") {
-      resetSearch();
-    } else {
       search(value);
     }
   };
