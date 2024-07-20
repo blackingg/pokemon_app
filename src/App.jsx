@@ -154,18 +154,6 @@ function App() {
         pokemon.name.toLowerCase().includes(searchText.toLowerCase())
       );
 
-      for (let i = 0; i < currentList.length; i++) {
-        if (currentList[i].name) {
-          if (
-            currentList[i].name
-              .replaceAll("-", " ")
-              .includes(searchText.toLowerCase())
-          ) {
-            searchResults.push(currentList[i]);
-          }
-        }
-      }
-
       setCurrentList(searchResults);
       if (searchText === "") {
         resetSearch();
