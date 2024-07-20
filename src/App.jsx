@@ -148,28 +148,6 @@ function App() {
       .replace("/", "");
   }
 
-  async function search(searchText) {
-    try {
-      const searchResults = currentList.filter((pokemon) =>
-        pokemon.name.toLowerCase().includes(searchText.toLowerCase())
-      );
-
-      console.log("searchResults: ", searchResults);
-
-      setCurrentList(searchResults);
-      if (searchText === "") {
-        resetSearch();
-      } else {
-        setCurrentList(pokemonList);
-        setCurrentlyShowingAmount(0);
-        setMaxIndex(29);
-        setCurrentList(searchResults);
-      }
-    } catch (error) {
-      console.error("Error searching:", error);
-    }
-  }
-
   const handleInputChange = (e) => {
     const value = e.target.value;
     setSearchText(value);
@@ -185,6 +163,28 @@ function App() {
     setCurrentlyShowingAmount(0);
     setMaxIndex(29);
     setCurrentList(pokemonList);
+  }
+
+  async function search(searchText) {
+    try {
+      const searchResults = currentList.filter((pokemon) =>
+        pokemon.name.toLowerCase().includes(searchText.toLowerCase())
+      );
+
+      console.log("searchResults: ", searchResults);
+
+      setCurrentList(searchResults);
+      if (searchText === "") {
+        resetSearch();
+      } else {
+        setCurrentlyShowingAmount(0);
+        setMaxIndex(29);
+        setCurrentList(searchResults);
+        setCurrentList(pokemonList);
+      }
+    } catch (error) {
+      console.error("Error searching:", error);
+    }
   }
 
   function closePokemonInfo() {
