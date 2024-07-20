@@ -175,7 +175,7 @@ function App() {
       console.log("searchText: ", searchText);
       console.log("searchResults: ", searchResults);
 
-      searchResults.push(currentList[i]);
+      searchResults.push(currentList);
 
       if (searchText === "") {
         resetSearch();
