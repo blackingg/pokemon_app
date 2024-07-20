@@ -150,7 +150,9 @@ function App() {
 
   async function search(searchText) {
     try {
-      let searchResults = [];
+      let searchResults = currentList.filter((pokemon) =>
+        pokemon.name.toLowerCase().includes(searchText.toLowerCase())
+      );
 
       for (let i = 0; i < currentList.length; i++) {
         if (currentList[i].name) {
