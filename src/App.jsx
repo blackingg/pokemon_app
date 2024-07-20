@@ -162,6 +162,7 @@ function App() {
       } else {
         setCurrentlyShowingAmount(0);
         setMaxIndex(29);
+        setCurrentList(pokemonList);
       }
     } catch (error) {
       console.error("Error searching:", error);
