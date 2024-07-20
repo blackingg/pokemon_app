@@ -160,6 +160,7 @@ function App() {
       if (searchText === "") {
         resetSearch();
       } else {
+        setCurrentList(pokemonList);
         setCurrentlyShowingAmount(0);
         setMaxIndex(29);
         setCurrentList(searchResults);
