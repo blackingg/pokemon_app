@@ -168,7 +168,7 @@ function App() {
 
   async function search(searchText) {
     try {
-      const searchResults = currentList.filter((pokemon) =>
+      const searchResults = pokemonList.filter((pokemon) =>
         pokemon.name.toLowerCase().includes(searchText.toLowerCase())
       );
 
