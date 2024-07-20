@@ -155,7 +155,7 @@ function App() {
     if (value === "") {
       resetSearch();
     } else {
-      search(searchText);
+      search();
     }
   };
 
@@ -168,7 +168,7 @@ function App() {
 
   async function search(searchText) {
     try {
-      const searchResults = pokemonList.filter(pokemon =>
+      const searchResults = pokemonList.filter((pokemon) =>
         pokemon.name.toLowerCase().includes(searchText.toLowerCase())
       );
 
