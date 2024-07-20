@@ -216,7 +216,7 @@ function App() {
                 id="search-input"
                 className="w-full md:w-fit flex-1 outline-none text-base text-blue-900 "
                 placeholder="Search your Pokemon"
-                value={setSearchText}
+                value={searchText}
                 onChange={handleInputChange}
               />
               <div className="bg-[#FF5350] text-white flex justify-center items-center w-10 h-10 drop-shadow-[5px_8px_10px_rgba(255,83,80,0.533)] rounded-xl">
