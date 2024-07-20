@@ -154,6 +154,8 @@ function App() {
         pokemon.name.toLowerCase().includes(searchText.toLowerCase())
       );
 
+      console.log(searchResults);
+
       setCurrentList(searchResults);
       if (searchText === "") {
         resetSearch();
