@@ -160,6 +160,7 @@ function App() {
   };
 
   function resetSearch() {
+    setSearchText("");
     setCurrentlyShowingAmount(0);
     setMaxIndex(29);
     setCurrentList(pokemonList);
@@ -177,10 +178,9 @@ function App() {
       if (searchText === "") {
         resetSearch();
       } else {
+        setCurrentList(searchResults);
         setCurrentlyShowingAmount(0);
         setMaxIndex(29);
-        setCurrentList(searchResults);
-        setCurrentList(pokemonList);
       }
     } catch (error) {
       console.error("Error searching:", error);
