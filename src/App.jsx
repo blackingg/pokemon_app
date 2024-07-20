@@ -150,7 +150,7 @@ function App() {
 
   async function search(searchText) {
     try {
-      let searchResults = currentList.filter((pokemon) =>
+      const searchResults = currentList.filter((pokemon) =>
         pokemon.name.toLowerCase().includes(searchText.toLowerCase())
       );
 
@@ -173,12 +173,11 @@ function App() {
     if (value === "") {
       resetSearch();
     } else {
-      search(value);
+      search(searchText);
     }
   };
 
   function resetSearch() {
-    setSearchText("");
     setCurrentlyShowingAmount(0);
     setMaxIndex(29);
     setCurrentList(pokemonList);
