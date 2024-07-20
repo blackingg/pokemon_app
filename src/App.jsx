@@ -155,7 +155,7 @@ function App() {
     if (value === "") {
       resetSearch();
     } else {
-      search();
+      search(value);
     }
   };
 
