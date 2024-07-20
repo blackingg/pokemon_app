@@ -169,13 +169,14 @@ function App() {
   async function search(searchText) {
     try {
       const searchResults = pokemonList.filter((pokemon) =>
-        pokemon.name.toLowerCase().includes(searchText.toLowerCase())
+        pokemon.name.replaceAll("-", " ").includes(searchText.toLowerCase())
       );
 
       console.log("searchText: ", searchText);
       console.log("searchResults: ", searchResults);
 
-      setCurrentList(searchResults);
+      searchResults.push(currentList[i]);
+
       if (searchText === "") {
         resetSearch();
       } else {
