@@ -86,24 +86,26 @@ function App() {
       );
 
       setMinLevel(
-        evoSpecies.chain.evolves_to.map((level, index) => (
-          <>
-            <div key={index}>
-              <span className="flex">
-                Lvl {level.evolution_details[0].min_level}
-              </span>
-            </div>
-          </>
-        ))
+        evoSpecies.chain.evolves_to
+          ? evoSpecies.chain.evolves_to.map((level, index) => (
+              <div key={index}>
+                <span className="flex">
+                  Lvl {level.evolution_details[0]?.min_level}
+                </span>
+              </div>
+            ))
+          : []
       );
 
       const secondMinLevel =
         evoSpecies.chain.evolves_to[0].evolves_to[0].evolution_details[0]
           .min_level;
       setMinLevel2(
-        <div>
-          <span className="flex">Lvl {secondMinLevel}</span>
-        </div>
+        secondMinLevel ? (
+          <div>
+            <span className="flex">Lvl {secondMinLevel}</span>
+          </div>
+        ) : null
       );
 
       setLoading(false);
@@ -118,6 +120,7 @@ function App() {
   }
 
   function filterIdFromSpeciesURL(url) {
+    if (!url) return "";
     return url
       .replace("https://pokeapi.co/api/v2/pokemon-species/", "")
       .replace("/", "");
