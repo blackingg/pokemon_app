@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./index.css";
-import { typeColors, statName } from "./setup";
+import { typeColors, types, statName } from "./setup";
 import { GrFormClose } from "react-icons/gr";
+import { GrPowerReset } from "react-icons/gr";
 
 function App() {
   const [currentList, setCurrentList] = useState([]);
@@ -21,49 +22,25 @@ function App() {
   const [loadingData, setDataLoading] = useState(true);
   const [pokemonInfoOpen, setPokemonInfoOpen] = useState(false);
 
-  // Function for fetching data and updating the state
-  async function fetchData() {
-    try {
-      setDataLoading(true);
-      const response = await fetch(
-        "https://pokemon-app-backend.vercel.app/api/pokemon"
-      );
-      const data = await response.json();
-
-      const pokemonList = data.results.map((pokemon, index) => ({
-        id: index + 1,
-        name: pokemon.name,
-        types: [],
-      }));
-
-      for (let i = 0; i < 18; i++) {
-        const typeResponse = await fetch(
-          `https://pokeapi.co/api/v2/type/${i + 1}`
-        );
-        const typeData = await typeResponse.json();
-
-        const pokemonInType = typeData.pokemon;
-
-        for (let j = 0; j < pokemonInType.length; j++) {
-          const pokemonId = pokemonInType[j].pokemon.url
-            .split("/")
-            .slice(-2)[0];
-          if (pokemonId <= pokemonList.length) {
-            pokemonList[pokemonId - 1].types.push(typeData.name);
-          }
-        }
-      }
-
-      setCurrentList(pokemonList);
-      setPokemonList(pokemonList);
-      setDataLoading(false);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      setDataLoading(false);
-    }
-  }
+  const [selectedType, setSelectedType] = useState("");
 
   useEffect(() => {
+    async function fetchData() {
+      try {
+        setDataLoading(true);
+        const response = await fetch(
+          "https://pokemon-app-backend.vercel.app/api/pokemon"
+        );
+        const data = await response.json();
+        console.log(data);
+        setCurrentList(data);
+        setPokemonList(data);
+        setDataLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setDataLoading(false);
+      }
+    }
     fetchData();
   }, []);
 
@@ -77,9 +54,7 @@ function App() {
         setMaxIndex((prevMaxIndex) => prevMaxIndex + 10);
       }
     }
-
     window.addEventListener("scroll", handleScroll);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -166,6 +141,14 @@ function App() {
     setCurrentList(pokemonList);
   }
 
+  function resetType() {
+    setSearchText("");
+    setCurrentlyShowingAmount(0);
+    setMaxIndex(29);
+    setCurrentList(pokemonList);
+    setSelectedType("");
+  }
+
   async function search(searchText) {
     try {
       const searchResults = pokemonList.filter((pokemon) =>
@@ -193,6 +176,46 @@ function App() {
     setPokemonInfoOpen(false);
   }
 
+  const handleSelectTypeChange = (event) => {
+    const value = event.target.value;
+    setSelectedType(value);
+
+    if (value === "") {
+      resetSearch();
+    } else {
+      typeSearch(value);
+    }
+  };
+
+  async function typeSearch(selectedType) {
+    try {
+      console.log("selectedType:", selectedType);
+
+      const results = await fetch(
+        `https://pokemon-app-backend.vercel.app/api/type/${selectedType}`
+      );
+      const typeResults = await results.json();
+
+      const pokemonData = typeResults.pokemon.map((p) => ({
+        id: parseInt(p.pokemon.url.split("/").slice(-2)[0], 10),
+        name: p.pokemon.name,
+        types: [typeResults.name],
+      }));
+      console.log(typeResults);
+      console.log(pokemonData);
+      setCurrentList(pokemonData);
+
+      if (selectedType === "") {
+        resetSearch();
+      } else {
+        setCurrentlyShowingAmount(0);
+        setMaxIndex(29);
+      }
+    } catch (error) {
+      console.error("Error searching:", error);
+    }
+  }
+
   return (
     <>
       {pokemonInfoOpen && loadingData ? (
@@ -210,38 +233,70 @@ function App() {
         </div>
       ) : (
         <>
-          <div className="flex space-x-3 md:space-x-8 lg:space-x-10 px-10 md:px-0">
-            <div className="bg-white flex w-[200px] md:w-[840px] p-4 mt-5 ml-0 md:ml-12 shadow-md rounded-3xl">
-              <input
-                id="search-input"
-                className="w-full md:w-fit flex-1 outline-none text-base text-blue-900 "
-                placeholder="Search your Pokemon"
-                value={searchText}
-                onChange={handleInputChange}
-              />
-              <div className="bg-[#FF5350] text-white flex justify-center items-center w-10 h-10 drop-shadow-[5px_8px_10px_rgba(255,83,80,0.533)] rounded-xl">
-                <img
-                  className="w-[25px]"
-                  src={`./pokeball-icon.png`}
+          <div className="lg:fixed lg:z-30 mt-10 px-10 md:px-0">
+            <div className="flex space-x-3 md:space-x-8 lg:space-x-10 ">
+              <div className="bg-white flex w-[70%] lg:w-[840px] p-4 mt-5 ml-0 md:ml-12 shadow-md rounded-3xl">
+                <input
+                  id="search-input"
+                  className="w-full md:w-fit flex-1 outline-none text-base text-blue-900 "
+                  placeholder="Search Pokémon"
+                  value={searchText}
+                  onChange={handleInputChange}
                 />
+                <div className="bg-[#FF5350] text-white flex justify-center items-center w-10 h-10 drop-shadow-[5px_8px_10px_rgba(255,83,80,0.533)] rounded-xl">
+                  <img
+                    className="w-[25px]"
+                    src={`./pokeball-icon.png`}
+                  />
+                </div>
+              </div>
+              <div className="bg-blue-100 text-xs md:text-base flex justify-center items-center p-5 mt-5 shadow-md rounded-3xl">
+                <a
+                  target="_blank"
+                  href="https://dribbble.com/shots/15128634-Pokemon-Pokedex-Website-Redesign-Concept"
+                >
+                  Link to Design
+                </a>
               </div>
             </div>
-            <div className="bg-blue-100 text-xs md:text-base flex justify-center items-center p-5 mt-5 shadow-md rounded-3xl">
-              <a
-                target="_blank"
-                href="https://dribbble.com/shots/15128634-Pokemon-Pokedex-Website-Redesign-Concept"
+
+            <div className="relative flex gap-5 w-[70%] lg:w-[840px] p-4 mt-1 ml-0 md:ml-12">
+              <select
+                id="dropdown"
+                value={selectedType}
+                onChange={handleSelectTypeChange}
+                className="w-auto px-3 py-2 bg-white border border-gray-300 rounded-lg shadow-sm cursor-pointer "
               >
-                Link to Design
-              </a>
+                <option
+                  value=""
+                  disabled
+                >
+                  Types
+                </option>
+                <option value="">{""}</option>
+                {types.map(({ id, type }) => (
+                  <>
+                    <option
+                      key={id}
+                      value={id}
+                    >
+                      {type}
+                    </option>
+                  </>
+                ))}
+              </select>
+              <div className="bg-blue-100 text-xs md:text-base flex justify-center items-center p-3 shadow-md rounded-md cursor-pointer">
+                <GrPowerReset onClick={resetType} />
+              </div>
             </div>
           </div>
 
-          <div className="w-fit min-h-screen justify-center items-center">
+          <div className="w-fit min-h-screen justify-center items-center lg:pt-52">
             <>
               <div
                 className={`${
                   selectedPokemon == null && !loading ? "z-20" : ""
-                } flex flex-wrap px-5 md:px-0 lg:px-10 relative md:w-[75%] md:mt-20 gap-3 md:gap-4 lg:gap-10`}
+                } flex flex-wrap px-5 md:px-0 lg:px-10 relative md:w-[70%] md:mt-20 gap-3 md:gap-4 lg:gap-10`}
               >
                 {currentList.slice(0, maxIndex).map((pokemon) => (
                   <div
