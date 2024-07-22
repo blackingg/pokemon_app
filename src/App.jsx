@@ -354,7 +354,7 @@ function App() {
                 )}
                 {loading ? (
                   <>
-                    <div className=" lg:visible z-30 w-full h-full grid place-items-center bg-white">
+                    <div className=" lg:visible z-30 w-full h-full grid place-items-center bg-white rounded-3xl">
                       <img
                         className="lg:visible motion-safe:animate-spin w-[50px]"
                         src={`./pokeball-icon.png`}
